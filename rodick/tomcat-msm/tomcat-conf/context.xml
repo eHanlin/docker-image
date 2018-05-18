@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='utf-8'?>
+<Context sessionCookiePath="/">
+
+    <Manager className="de.javakaffee.web.msm.MemcachedBackupSessionManager"
+             memcachedNodes="msm:11211"
+             transcoderFactoryClass="de.javakaffee.web.msm.serializer.json.JSONTranscoderFactory" 
+             sticky="false" 
+             operationTimeout="10000" 
+             memcachedProtocol="text"
+             enableStatistics="false" />
+
+</Context>
+
