@@ -1,17 +1,16 @@
-FROM jeanblanchard/tomcat:8.5.9
+FROM tomcat:8.5.31-jre8-slim
 
 MAINTAINER rodick.h <rodick@ehanlin.com.tw>
 
 ENV PATH=$PATH:$CATALINA_HOME/bin
 
-COPY bin/* ${CATALINA_HOME}/bin/
-COPY UnlimitedJCEPolicyJDK8/* /opt/jdk/jre/lib/security/
-COPY tomcat-lib/*.jar ${CATALINA_HOME}/lib/
-COPY tomcat-conf/* ${CATALINA_HOME}/conf/
-RUN sed -i '/Connector port="8080"/ s/$/ URIEncoding="UTF-8"/' ${CATALINA_HOME}/conf/server.xml && \
-    sed -i -r '/session-timeout/ s/\d+/2880/g' ${CATALINA_HOME}/conf/web.xml && \
-    apk add vim --update && ln -sf /usr/bin/vim /usr/bin/vi && \
-    rm -rf ${CATALINA_HOME}/webapps/* /var/cache/apk/*
+COPY tomcat/ ${CATALINA_HOME}/
+RUN apt-get update && apt-get install -y wget vim && \
+    mkdir -p /opt/cprof && wget -q -O- https://storage.googleapis.com/cloud-profiler/java/latest/profiler_java_agent.tar.gz | tar xzv -C /opt/cprof && \
+    ln -sf /usr/share/zoneinfo/Asia/Taipei /etc/localtime && echo "Asia/Taipei" > /etc/timezone && \
+    sed -i '/Connector port="8080"/ s/$/ URIEncoding="UTF-8"/' ${CATALINA_HOME}/conf/server.xml && \
+    sed -i -r '/session-timeout/ s/[0-9]+/2880/g' ${CATALINA_HOME}/conf/web.xml && \
+    rm -rf ${CATALINA_HOME}/webapps/* /var/lib/apt/lists/* 
 
 ENTRYPOINT ["run-war.sh"]
 
