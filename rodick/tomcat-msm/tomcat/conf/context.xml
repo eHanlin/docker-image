@@ -6,7 +6,7 @@
              transcoderFactoryClass="de.javakaffee.web.msm.serializer.json.JSONTranscoderFactory" 
              sticky="false" 
              operationTimeout="10000" 
-             memcachedProtocol="text"
+             memcachedProtocol="binary"
              enableStatistics="false" />
 
 </Context>
