@@ -12,5 +12,7 @@ RUN apt-get update && apt-get install -y wget vim && \
     sed -i -r '/session-timeout/ s/[0-9]+/2880/g' ${CATALINA_HOME}/conf/web.xml && \
     rm -rf ${CATALINA_HOME}/webapps/* /var/lib/apt/lists/* 
 
-ENTRYPOINT ["run-war.sh"]
+ARG START_SCRIPT_ARG="run-war.sh"
+ENV START_SCRIPT_ENV=$START_SCRIPT_ARG
 
+ENTRYPOINT ["run.sh"]
