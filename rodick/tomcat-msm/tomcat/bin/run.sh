@@ -1,5 +1,5 @@
-#!/bin/sh
+#!/bin/bash
 
 RUN_CMD="$START_SCRIPT_ENV $*"
 
-/bin/sh -c "$RUN_CMD"
+/bin/bash -c "$RUN_CMD"
