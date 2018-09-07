@@ -1,17 +1,43 @@
-# docker-image
-eHanlin general purpose docker images
 
-rodick/tomcat7:0.63-jce_policy-8
+## ROOT 版
+build and deploy
 ```
-docker build -t rodick/tomcat7:0.63-jce_policy-8 rodick/tomcat7
-```
-
-rodick/tomcat7-msm-aec:0.63-jce_policy-8
-```
-docker build -t rodick/tomcat7-msm-aec:0.63-jce_policy-8 rodick/tomcat7-msm-aec
+docker build -t="gcr.io/tutor-204108/tomcat-msm:8.5.31" .
+gcloud docker -- push "gcr.io/tutor-204108/tomcat-msm:8.5.31"
 ```
 
-rodick/tomcat-msm:8.5.9
+base jre build and deploy 
 ```
-docker build -t rodick/tomcat-msm:8.5.9 .
+docker build -f basejre.dockerfile --build-arg "START_SCRIPT_ARG=run-app-war.sh" -t="gcr.io/tutor-204108/tomcat-msm:8.5.31-base" .
+gcloud docker -- push "gcr.io/tutor-204108/tomcat-msm:8.5.31-base"
+```
+
+---
+
+## PATH 版
+build and deploy
+```
+docker build --build-arg "START_SCRIPT_ARG=run-app-war.sh" -t="gcr.io/tutor-204108/tomcat-msm:8.5.31-app" .
+gcloud docker -- push "gcr.io/tutor-204108/tomcat-msm:8.5.31-app"
+```
+
+base jre build and deploy 
+```
+docker build -f basejre.dockerfile --build-arg "START_SCRIPT_ARG=run-app-war.sh" -t="gcr.io/tutor-204108/tomcat-msm:8.5.31-app-base" .
+gcloud docker -- push "gcr.io/tutor-204108/tomcat-msm:8.5.31-app-base"
+```
+
+---
+
+## Multiple path 版
+build and deploy
+```
+docker build --build-arg "START_SCRIPT_ARG=run-multiple-app-war.sh" -t="gcr.io/tutor-204108/tomcat-msm:8.5.31-multiple-app" .
+gcloud docker -- push "gcr.io/tutor-204108/tomcat-msm:8.5.31-multiple-app"
+```
+
+base jre build and deploy 
+```
+docker build -f basejre.dockerfile --build-arg "START_SCRIPT_ARG=run-app-war.sh" -t="gcr.io/tutor-204108/tomcat-msm:8.5.31-multiple-app-base" .
+gcloud docker -- push "gcr.io/tutor-204108/tomcat-msm:8.5.31-multiple-app-base"
 ```
