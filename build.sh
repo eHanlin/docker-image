@@ -1,3 +1,6 @@
+docker build -f Dockerfile.basetomcat -t="gcr.io/tutor-204108/basetomcat:8.5.31" .
+docker push "gcr.io/tutor-204108/basetomcat:8.5.31"
+
 docker build -t="gcr.io/tutor-204108/tomcat-msm:8.5.31" .
 docker push "gcr.io/tutor-204108/tomcat-msm:8.5.31"
 
